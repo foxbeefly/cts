@@ -5,24 +5,24 @@
         versionCode = "1"
         version     = "0.1">
  
-    <name>Cape Town Surfski 2013</name>
+	<name>Cape Town Surfski 2013</name>
  
-    <description>
-        Cape Town Surfski 2013 Calendar app
-    </description>
+	<description>
+		Cape Town Surfski 2013 Calendar app
+	</description>
  
-    <author href="http://www.stylus.co.za" email="david@stylus.co.za">
-	David Fox      
-    </author>
- 
-    <feature name="http://api.phonegap.com/1.0/camera"/>
-    <feature name="http://api.phonegap.com/1.0/contacts"/>
-    <feature name="http://api.phonegap.com/1.0/file"/>
-    <feature name="http://api.phonegap.com/1.0/geolocation"/>
-    <feature name="http://api.phonegap.com/1.0/media"/>
-    <feature name="http://api.phonegap.com/1.0/network"/>
-    <feature name="http://api.phonegap.com/1.0/notification"/>
-    
-    <gap:splash src="images/splash.png" />
+	<author href="http://www.stylus.co.za" email="david@stylus.co.za">
+		David Fox      
+	</author>
+
+	<feature name="http://api.phonegap.com/1.0/camera"/>
+	<feature name="http://api.phonegap.com/1.0/contacts"/>
+	<feature name="http://api.phonegap.com/1.0/file"/>
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/media"/>
+	<feature name="http://api.phonegap.com/1.0/network"/>
+	<feature name="http://api.phonegap.com/1.0/notification"/>
+	
+	<gap:splash src="images/splash.png" />
  
 </widget>

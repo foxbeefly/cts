@@ -41,10 +41,11 @@
 		pointGPS.value=lat+","+lon;
 	}
 
-	function initialize(gpsCoords)
+	function initializeMap(gpsCoords)
 	{
 
 		var div = $('#gps').val();
+		gpsCoords
 		var n = div.lastIndexOf(',');
 		var Lati = div.substring(0, n);
 		var Longi = div.substring(n + 1);
@@ -62,7 +63,27 @@
 
 		marker.setMap(map);	
 	}
-	
+	function initializeTestMap(gpsCoords)
+	{
+
+		var div = gpsCoords;
+		var n = div.lastIndexOf(',');
+		var Lati = div.substring(0, n);
+		var Longi = div.substring(n + 1);
+		var myCenter=new google.maps.LatLng(Lati,Longi);
+
+		var mapProp = {
+	  		center:myCenter,
+	  		zoom:14,
+			mapTypeId:google.maps.MapTypeId.ROADMAP
+		};
+		var map=new google.maps.Map(document.getElementById("mapHolder"), mapProp);
+		var marker=new google.maps.Marker({
+			position:myCenter,
+		});
+
+		marker.setMap(map);	
+	}	
 	function showError(error)
 	{
 		switch(error.code) 
@@ -81,7 +102,15 @@
 				break;
 		}
 	}
-	
+
+$("#mapPage").live("pageinit", function() {
+	var gpsCoords = "-34.13932,18.43230";
+	if(gpsCoords.length > 0) {
+		detectBrowser();
+		initializeTestMap(gpsCoords);
+	}	
+});
+		
 $("#calendarPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
@@ -174,7 +203,8 @@ $("#detailPage").live("pagebeforeshow", function() {
 	var id = query.split("=")[1];
 	console.log("Getting remote detail for "+id);
 	$.mobile.showPageLoadingMsg();
-	$.get("http://127.0.0.1/cts/data.php", {id:id}, function(res) {
+	//$.get("http://127.0.0.1/cts/data.php", {id:id}, function(res) {
+	$.get("http://www.stylus.co.za/cts/data.php", {id:id}, function(res) {
 		$.mobile.hidePageLoadingMsg();
 		$("h1",page).text(res.name);
 		var s = "<p>" + res.description + "</p>";
@@ -194,11 +224,11 @@ $("#detailPage").live("pagebeforeshow", function() {
 		var gpsCoords = $('#gps').val();
 		if(gpsCoords.length > 0) {
 			detectBrowser();
-			initialize(gpsCoords);
+			initializeMap(gpsCoords);
 		} else {
 			// show map at current position
 			// getLocation(); ????????
-			console.log("No gpsCoords vale....");
+			console.log("No gpsCoords value....");
 		}			
 	},"json");
 
