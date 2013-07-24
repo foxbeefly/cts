@@ -3,8 +3,10 @@
 		var mapdivMap = document.getElementById("mapHolder");
 	
 		if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
-			mapdivMap.style.width = '100%';
-			mapdivMap.style.height = '100%';
+			//mapdivMap.style.width = '100%';
+			//mapdivMap.style.height = '100%';
+			mapdivMap.style.width = '450px';
+			mapdivMap.style.height = '300px';
 		} else {
 			mapdivMap.style.width = '450px';
 			mapdivMap.style.height = '300px';
