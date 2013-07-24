@@ -67,25 +67,12 @@
 	}
 	function initializeTestMap(gpsCoords)
 	{
-
-		var div = gpsCoords;
-		var n = div.lastIndexOf(',');
-		var Lati = div.substring(0, n);
-		var Longi = div.substring(n + 1);
-		var myCenter=new google.maps.LatLng(Lati,Longi);
-
-		var mapProp = {
-	  		center:myCenter,
-	  		zoom:14,
-			mapTypeId:google.maps.MapTypeId.ROADMAP
-		};
-		var map=new google.maps.Map(document.getElementById("mapHolder"), mapProp);
-		var marker=new google.maps.Marker({
-			position:myCenter,
-		});
-
-		marker.setMap(map);	
-	}	
+		$('#mapHolder').gmap().bind('init', function(ev, map) {
+			$('#mapHolder').gmap('addMarker', {'position': gpsCoords, 'bounds': true}).click(function() {
+				$('#mapHolder').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
+			});
+		});	
+	}
 	function showError(error)
 	{
 		switch(error.code) 
@@ -106,6 +93,7 @@
 	}
 
 $("#mapPage").live("pageinit", function() {
+	// http://jquery-ui-map.googlecode.com/svn/trunk/demos/jquery-google-maps-basic-example.html
 	var gpsCoords = "-34.13932,18.43230";
 	if(gpsCoords.length > 0) {
 		detectBrowser();
