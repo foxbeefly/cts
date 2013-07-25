@@ -72,7 +72,7 @@
 				$('#mapHolder').gmap('openInfoWindow', {'content': 'Hello World!'}, this);
 			});
 		});	
-	}
+	}	
 	function showError(error)
 	{
 		switch(error.code) 
@@ -202,11 +202,13 @@ $("#detailPage").live("pagebeforeshow", function() {
 			s += "<p>Venue: "+res.venue + "<br/>";
 			s += "<p>GPS: "+res.gps + "<br/>";
 			s += "<input type=hidden id=gps value=" + res.gps + ">";
-			s += "<p>Price: ";
+			s += "<p id=\"price\">Price: ";
 			if(res.cost == 0) s += "tbc";
 			else s+= res.cost;			
- 			s+= "<p>";
-			s+= "<p><img src='images/" + res.image + "'></p>";
+ 			s+= "</p>";
+ 			
+ 			if(res.image !== null) s += "<p class=\"image\"><img src='images/" + res.image + "'></p>";
+			
 			$("#detailContent").html(s);
 			var x=document.getElementById("demoHolder");
 			//console.log("x = " + x);

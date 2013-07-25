@@ -9,7 +9,7 @@ $app_root = $document_root.'cts/';
 /*
  * LIVE
 
-$includes_path = $document_root.'gaf/includes'; //live
+$includes_path = $document_root.'cts/includes'; //live
 $BASE_DIR = '/cts/'; // live
  */
 /*
