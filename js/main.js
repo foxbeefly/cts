@@ -194,7 +194,7 @@ $("#sponsorsPage").live("pageinit", function() {
 
 function createContact() {					
     if (navigator.contacts) {
-        navigator.notification.alert(message, null, title, 'OK');
+        navigator.notification.alert('message', null, 'title', 'OK');
     } else {
         alert("Not device");
         return;
