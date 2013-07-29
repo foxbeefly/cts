@@ -26,8 +26,22 @@ class Application extends DB_Class {
 					  `eventImage` text,
 					  PRIMARY KEY (`eventID`)
 					);";
+		} elseif($table == $this->tableSponsors) {
+			$sql =	"CREATE TABLE IF NOT EXISTS `$this->tableSponsors` (
+					  `sponsorID` int(11) NOT NULL AUTO_INCREMENT,
+					  `sponsorName` varchar(200) NOT NULL,
+					  `sponsorDescription` text,
+					  `sponsorTel` text,
+					  `sponsorCell` text,
+					  `sponsorURL` text,
+					  `sponsorFacebook` text,
+					  `sponsorTwitter` text,
+					  `sponsorImage` text,
+					  `sponsorIcon` text,
+					  PRIMARY KEY (`sponsorID`)
+					);";			
 		} elseif($table == $this->tableLog) {
-			
+			// ja ja
 		}			
 		if(!empty($sql))
 		{

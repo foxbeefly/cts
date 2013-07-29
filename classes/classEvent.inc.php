@@ -14,6 +14,8 @@ class Event extends Application
 				$listArray[$c]['name'] = $row['eventName'];
 				$listArray[$c]['description'] = $row['eventDescription'];
 				$listArray[$c]['start'] = $row['eventStart'];
+				$listArray[$c]['startDate'] = date("d M Y", strtotime($row['eventStart']));
+				$listArray[$c]['startTime'] = date("H:i", strtotime($row['eventStart']));
 				//$listArray[$c]['end'] = $row['eventEnd'];
 				$listArray[$c]['venue'] = $row['eventVenue'];
 				$listArray[$c]['gps'] = $row['eventGPS'];
@@ -34,6 +36,8 @@ class Event extends Application
 			$eventList['name'] = $row['eventName'];
 			$eventList['description'] = $row['eventDescription'];
 			$eventList['start'] = $row['eventStart'];
+			$eventList['startDate'] = date("d M Y", strtotime($row['eventStart']));
+			$eventList['startTime'] = date("H:i", strtotime($row['eventStart']));			
 			//$eventList['end'] = $row['eventEnd'];
 			$eventList['venue'] = $row['eventVenue'];
 			$eventList['gps'] = $row['eventGPS'];

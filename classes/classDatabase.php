@@ -26,13 +26,13 @@ abstract class DB_Class {
 	
 	// all the tables
 	public $tableEvents = 'ctsEvents';
+	public $tableSponsors = 'ctsSponsors';
 	public $tableLog = 'ctsLog';
 	
-	//date_default_timezone_set('Africa/Johannesburg');
-
     function __construct()
 	{ 
-        $this->conn = mysql_connect ($this->host, $this->user, $this->pass) 
+		date_default_timezone_set('Africa/Johannesburg');
+		$this->conn = mysql_connect ($this->host, $this->user, $this->pass) 
             or die ("Unable to connect to Database Server"); 
 
         mysql_select_db ($this->dbase, $this->conn) 

@@ -104,14 +104,14 @@ $("#mapPage").live("pageinit", function() {
 $("#calendarPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/data.php", {}, function(res) {
-	$.get("http://www.stylus.co.za/cts/data.php", {}, function(res) {	
+	//$.get("http://127.0.0.1/cts/eventdata.php", {}, function(res) {
+	$.get("http://www.stylus.co.za/cts/eventdata.php", {}, function(res) {	
 		$.mobile.hidePageLoadingMsg();
 		var s = "";
 		
 		for(var i=0; i<res.length; i++) {
 			s+= "<li class=\"ui-button\">";
-			s+= "<a href='event-detail.html?id=" + res[i].id + "'><p class=\"ui-li-aside ui-li-desc\"><strong>" + res[i].start + "</strong></p>";
+			s+= "<a href='event-detail.html?id=" + res[i].id + "'><p class=\"ui-li-aside ui-li-desc\"><strong>" + res[i].startTime + ", " + res[i].startDate + "</strong></p>";
 			s+= "<h3>" + res[i].name + "</h3>";
 			s+= "<p>" + res[i].description + "</p>";
 			s+= "</a>";
@@ -123,28 +123,74 @@ $("#calendarPage").live("pageinit", function() {
  
 });
 
-$("#sponsorList").live("pageinit", function() {
+$("#resultsPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/data.php", {}, function(res) {
-	$.get("http://www.stylus.co.za/cts/data.php", {}, function(res) {
+	//$.get("http://127.0.0.1/cts/eventdata.php", {}, function(res) {
+	$.get("http://www.stylus.co.za/cts/eventdata.php", {}, function(res) {	
 		$.mobile.hidePageLoadingMsg();
 		var s = "";
 		
 		for(var i=0; i<res.length; i++) {
 			s+= "<li class=\"ui-button\">";
-			s+= "<a href='event-detail.html?id=" + res[i].id + "'><p class=\"ui-li-aside ui-li-desc\"><strong>" + res[i].start + "</strong></p>";
+			s+= "<a href='result.html?id=" + res[i].id + "'><p class=\"ui-li-aside ui-li-desc\"><strong>" + res[i].startDate + "</strong></p>";
 			s+= "<h3>" + res[i].name + "</h3>";
 			s+= "<p>" + res[i].description + "</p>";
 			s+= "</a>";
 			s+= "</li>";
 		}
-		$("#eventList").html(s);
-		$("#eventList").listview("refresh");
+		$("#resultsList").html(s);
+		$("#resultsList").listview("refresh");
+	},"json");
+});
+
+$("#resultPage").live("pagebeforeshow", function() {
+	var page = $(this);
+	var query = page.data("url").split("?")[1];
+	var id = query.split("=")[1];
+	console.log("Getting remote detail for "+id);
+	$.mobile.showPageLoadingMsg();
+	//$.get("http://127.0.0.1/cts/eventdata.php", {id:id}, function(res) {
+	$.get("http://www.stylus.co.za/cts/eventdata.php", {id:id}, function(res) {
+		$.mobile.hidePageLoadingMsg();
+		$("h1",page).text(res.name);
+		var s = "<p>" + res.description + "</p>";
+			s += "<p>Date: " + res.start + "<br/>";
+			s += "<p>Venue: "+res.venue + "<br/>";
+			//s += "<p>GPS: "+res.gps + "<br/>";
+			//s += "<input type=hidden id=gps value=" + res.gps + ">";
+ 			
+ 			if(res.image !== null) s += "<p class=\"image\"><img src='images/" + res.image + "'></p>";
+			
+			$("#resultContent").html(s);
+			
+	},"json");
+});
+
+$("#sponsorsPage").live("pageinit", function() {
+	// console.log("Getting remote list");
+	$.mobile.showPageLoadingMsg();
+	//$.get("http://127.0.0.1/cts/sponsordata.php", {}, function(res) {
+	$.get("http://www.stylus.co.za/cts/sponsordata.php", {}, function(res) {
+		$.mobile.hidePageLoadingMsg();
+		var s = "";
+		if (res.length === 0) {
+			s+= "<li>Nothing for you</li>";
+		} else {
+			for(var i=0; i<res.length; i++) {
+				s+= "<li class=\"ui-button\">";
+				s+= "<a href='sponsor-detail.html?id=" + res[i].id + "'><img src='images/" + res[i].icon + "' class='ui-li-thumb'><p class=\"ui-li-aside ui-li-desc\"><strong>" + res[i].twitter + "</strong></p>";
+				s+= "<h3>" + res[i].name + "</h3>";
+				s+= "<p>" + res[i].description + "</p>";
+				s+= "</a>";
+				s+= "</li>";
+			}
+		}
+		$("#sponsorList").html(s);
+		$("#sponsorList").listview("refresh");
 	},"json");
  
 });
-
 
 function createContact() {					
     if (navigator.contacts) {
@@ -187,21 +233,56 @@ function onError(contactError) {
 	gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "Contacts", "Create", "Error: " +contactError.code, 1);
 };
 
+
+$("#sponsorPage").live("pageshow", function() {
+	$("#btnCreateContact").off("click").on("click", createContact);
+	//$("#btnCreateContact").on("click", function() {	});
+});
+
+$("#sponsorPage").live("pagebeforeshow", function() {
+	var page = $(this);
+	var query = page.data("url").split("?")[1];
+	var id = query.split("=")[1];
+	console.log("Getting remote detail for "+id);
+	$.mobile.showPageLoadingMsg();
+	//$.get("http://127.0.0.1/cts/sponsordata.php", {id:id}, function(res) {
+	$.get("http://www.stylus.co.za/cts/sponsordata.php", {id:id}, function(res) {
+		$.mobile.hidePageLoadingMsg();
+		$("h1",page).text(res.name);
+		var s = "<p>" + res.description + "</p>";
+
+			if(res.twitter !== null) s += "<p>Twitter: " + res.twitter + "<br/>";
+			if(res.url !== null) s += "<p>Web: " + res.url + "<br/>";
+			
+			if(res.cell !== null) s += "<p><a href=\"sms:" + res.cell + "\">SMS<br/>" + res.cell + "</a></p>";
+
+			//if(res.telephone == 0) s += "tbc";
+			//else s+= res.cost;			
+ 			//s+= "</p>";
+ 			
+ 			if(res.image !== null) s += "<p class=\"image\"><img src='images/" + res.image + "'></p>";
+			
+			$("#detailContent").html(s);
+	},"json");
+});
+
 $("#detailPage").live("pagebeforeshow", function() {
 	var page = $(this);
 	var query = page.data("url").split("?")[1];
 	var id = query.split("=")[1];
 	console.log("Getting remote detail for "+id);
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/data.php", {id:id}, function(res) {
-	$.get("http://www.stylus.co.za/cts/data.php", {id:id}, function(res) {
+	//$.get("http://127.0.0.1/cts/eventdata.php", {id:id}, function(res) {
+	$.get("http://www.stylus.co.za/cts/eventdata.php", {id:id}, function(res) {
 		$.mobile.hidePageLoadingMsg();
 		$("h1",page).text(res.name);
 		var s = "<p>" + res.description + "</p>";
-			s += "<p>Date: " + res.start + "<br/>";
-			s += "<p>Venue: "+res.venue + "<br/>";
-			s += "<p>GPS: "+res.gps + "<br/>";
-			s += "<input type=hidden id=gps value=" + res.gps + ">";
+			s += "<p>Date: " + res.startDate + "<br/>";
+			s += "<p>Time: " + res.startTime + "<br/>";
+			s += "<p>Venue: " + res.venue + "<br/>";
+
+			if(res.gps !== null) s += "<p>GPS: " + res.gps + "<br/><input type=hidden id=gps value=" + res.gps + ">";
+			
 			s += "<p id=\"price\">Price: ";
 			if(res.cost == 0) s += "tbc";
 			else s+= res.cost;			
@@ -223,13 +304,6 @@ $("#detailPage").live("pagebeforeshow", function() {
 			console.log("No gpsCoords value....");
 		}			
 	},"json");
-
-
-});
-
-$("#sponsorPage").live("pageshow", function() {
-	$("#btnCreateContact").off("click").on("click", createContact);
-	//$("#btnCreateContact").on("click", function() {	});
 });
 
 var app = {
