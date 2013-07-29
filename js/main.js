@@ -262,6 +262,8 @@ $("#sponsorPage").live("pagebeforeshow", function() {
  			
  			if(res.image !== null) s += "<p class=\"image\"><img src='images/" + res.image + "'></p>";
 			
+			s += "<p><a id='btnCreateContact' data-role='button'>Create Contact</a></p>";
+			
 			$("#detailContent").html(s);
 	},"json");
 });
