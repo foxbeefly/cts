@@ -167,6 +167,70 @@ $("#resultPage").live("pagebeforeshow", function() {
 	},"json");
 });
 
+$("#weatherPage").live("pagebeforeshow", function() {
+
+	function getWeather(callback) {
+	    var weatherCityCode = '3369157'; // Cape Town
+	    var openweathermapURL = 'http://api.openweathermap.org/data/2.1/weather/city/' + weatherCityCode;
+	    $.ajax({
+	        type: "GET",
+	        url: openweathermapURL,
+	        dataType: "jsonp",
+			success: callback
+	    });
+	}
+	var page = $(this);
+	var query = page.data("url").split("?")[1];
+	 
+	var KELVIN = 273.15;
+	// get data:
+	getWeather(function (data) {
+	    console.log('weather data received');
+	    //console.log(data.name);
+
+		$("h1",page).text(data.name);
+		var tempVal = data.main.temp;
+		var tempCel = tempVal - KELVIN;
+		var s = "";
+		// /s += "<p>" + data.name + "</p>";
+		s += "<p>Temp: " + Math.round(tempCel) + "&deg;C</p>";
+		s += "<p>Wind speed: " + data.wind.speed + "</p>";
+		s += "<p>Wind gust: " + data.wind.gust + "</p>";
+		s += "<p>Wind deg: " + data.wind.deg + "</p>";
+		s += "<p><img title='" + data.weather.icon + "' src='http://openweathermap.org/img/w/" + data.weather[0]['icon'] + ".png' /></p>";
+		
+		s += "<p><a href='" + data.url + "' title='' target='_blank'>" + data.url + "</a></p>";
+		
+		$("#weatherReport").html(s);
+	});
+});
+
+$("#weatherPageXXX").live("pagebeforeshow", function() {
+	var page = $(this);
+	//var query = page.data("url").split("?")[1];
+	//var id = query.split("=")[1];
+	//console.log("Getting weather detail for "+id);
+	console.log("Getting weather detail");
+	$.mobile.showPageLoadingMsg();
+	$.get("http://api.openweathermap.org/data/2.1/weather/city/524901", function(res) {
+		alert("Data Loaded: " + res);
+		console.log("Inside...");
+		$.mobile.hidePageLoadingMsg();
+		//$("h1",page).text(res.name);
+		// /var s = res;
+		//var s = "<p>" + res.description + "</p>";
+			//s += "<p>Date: " + res.start + "<br/>";
+			//s += "<p>Venue: "+res.venue + "<br/>";
+			//s += "<p>GPS: "+res.gps + "<br/>";
+			//s += "<input type=hidden id=gps value=" + res.gps + ">";
+ 			
+ 			//if(res.image !== null) s += "<p class=\"image\"><img src='images/" + res.image + "'></p>";
+			
+			$("#weatherReport").html(res);
+			
+	},"json");
+});
+
 $("#sponsorsPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
