@@ -463,17 +463,28 @@ $("#detailPage").live("pagebeforeshow", function() {
 	},"json");
 });
 
-var app = {
-	showAlert: function (message, title) {
-	    if (navigator.notification) {
-			navigator.notification.alert(message + ' on Device', null, title, 'OK');
-	    } else {
-	        alert(title ? (title + ": " + message) : message);
-	    }
-	},
-    initialize: function() {
-        var self = this;
-        self.showAlert('App Initialized', 'Info');
-    }	
-}
-app.initialize();
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // Empty
+    }
+
+    // alert dialog dismissed
+    function alertDismissed() {
+        // do something
+    }
+
+    // Show a custom alertDismissed
+    //
+    function showAlert() {
+        navigator.notification.alert(
+            'You are the winner!',  // message
+            alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
+    }
