@@ -476,4 +476,4 @@ var app = {
         self.showAlert('App Initialized', 'Info');
     }	
 }
-//app.initialize();
+app.initialize();
