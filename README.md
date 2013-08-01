@@ -16,3 +16,10 @@ v0.0.4
 - abstracted Sponsors to database
 - improved Sponsors list - added icons
 - laid foundations for Results page(s)
+
+v0.0.5
+- added different "sponsors" to cater for restaurants and ability to extend further
+- improved some of the json creation code
+- implemented a heap of Weather code from the openweathermap.org API
+- added / fixed / improved and tested table create code
+- added filter to listview on Results page

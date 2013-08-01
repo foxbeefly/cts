@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!-- http://www.raymondcamden.com/index.cfm/2012/5/5/Converting-a-dynamic-web-site-to-a-PhoneGap-application --> 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -22,11 +21,13 @@
 	<div data-role="header">
 		<a href="index.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
 		<h1>Cape Town Surfski 2013</h1>
-		<a href="about-popup.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+		<a href="weather-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
 	</div>
 	<div data-role="content">
+		<p>The weather forecast for today:</p>
 		<!-- http://api.openweathermap.org/data/2.1/weather/city/524901?type=html</p> -->
 		<div id="weatherReport"></div>
+		<p><a id='btnForecast' data-role='button' href="forecast.html">Forecast</a></p>
 	</div>
 	<div data-role="footer">
 		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>

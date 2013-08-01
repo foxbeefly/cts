@@ -150,28 +150,52 @@ $("#resultPage").live("pagebeforeshow", function() {
 	var id = query.split("=")[1];
 	console.log("Getting remote detail for "+id);
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/eventdata.php", {id:id}, function(res) {
-	$.get("http://www.stylus.co.za/cts/eventdata.php", {id:id}, function(res) {
+	//$.get("http://127.0.0.1/cts/eventdata.php", {rid:id}, function(res) {
+	$.get("http://www.stylus.co.za/cts/eventdata.php", {rid:id}, function(res) {
 		$.mobile.hidePageLoadingMsg();
-		$("h1",page).text(res.name);
-		var s = "<p>" + res.description + "</p>";
-			s += "<p>Date: " + res.start + "<br/>";
-			s += "<p>Venue: "+res.venue + "<br/>";
-			//s += "<p>GPS: "+res.gps + "<br/>";
-			//s += "<input type=hidden id=gps value=" + res.gps + ">";
- 			
- 			if(res.image !== null) s += "<p class=\"image\"><img src='images/" + res.image + "'></p>";
+		$("h1",page).text(res[0].eventName);
+		var s = "<p>" + res[0].eventDescription + "</p>";
+			s += "Date: " + res[0].startTime + ", " + res[0].startDate + "<br/>";
+			s += "Venue: "+res[0].eventVenue + "</p>";
+			if(res[0].resultPos !== null){
+				s += "<table data-role=\"table\" id=\"result-table\" class=\"ui-responsive table-stripe\" data-mode=\"columntoggle\">";
+				s += "<thead><th><abbr title='Position'>Pos</abbr></th><th data-priority='2'><abbr title='Race No'>No</th><th>Name</th><th>Time</th><th data-priority='1'>Category</th></thead>";
+				s += "<tbody>";
+				$(jQuery.parseJSON(JSON.stringify(res))).each(function() {  
+					var pos = this.resultPos;
+					var no = this.resultRaceNo;
+					var name = this.resultRaceName;
+					var time = this.resultRaceTime;
+					var cat = this.resultRaceCat;
+					s += "<tr><td>" + pos + "</td><td>" + no + "</td><td>" + name + "</td><td>" + time + "</td><td>" + cat + "</td></tr>";
+				});			
+				
+				s += "</tbody>";
+				s += "</table>";
+ 			} else {
+ 				s += "<div class=\"ui-bar ui-bar-e\"><p>No results</p></div>";
+ 			}
+ 			if(res[0].eventImage !== null) s += "<p class=\"image\"><img src='images/" + res[0].eventImage + "'></p>";
 			
-			$("#resultContent").html(s);
+			$("#resultContent").html(s).trigger( "create" );
 			
 	},"json");
 });
 
 $("#weatherPage").live("pagebeforeshow", function() {
 
+	var page = $(this);
+	var query = page.data("url").split("?")[1];
+	 
+	var weatherCityCode = '3369157'; // Cape Town
+	var appID = 'aa05fb30074ff517833db8ba123597bf';
+	var unit = 'metric';
+	var KELVIN = 273.15;
+	if(unit === 'metric') var KELVIN = 0;
+	    	
 	function getWeather(callback) {
-	    var weatherCityCode = '3369157'; // Cape Town
-	    var openweathermapURL = 'http://api.openweathermap.org/data/2.1/weather/city/' + weatherCityCode;
+
+	    var openweathermapURL = 'http://api.openweathermap.org/data/2.1/weather/city?id=' + weatherCityCode + '&APPID=' + appID + '&units=' + unit;
 	    $.ajax({
 	        type: "GET",
 	        url: openweathermapURL,
@@ -179,81 +203,89 @@ $("#weatherPage").live("pagebeforeshow", function() {
 			success: callback
 	    });
 	}
-	var page = $(this);
-	var query = page.data("url").split("?")[1];
-	 
-	var KELVIN = 273.15;
+
 	// get data:
 	getWeather(function (data) {
 	    console.log('weather data received');
-	    //console.log(data.name);
 
 		$("h1",page).text(data.name);
+		
 		var tempVal = data.main.temp;
+		var tempMin = Math.round(data.main.temp_min - KELVIN);
+		var tempMax = Math.round(data.main.temp_max - KELVIN);
 		var tempCel = tempVal - KELVIN;
+		
 		var s = "";
-		// /s += "<p>" + data.name + "</p>";
-		s += "<p>Temp: " + Math.round(tempCel) + "&deg;C</p>";
-		s += "<p>Wind speed: " + data.wind.speed + "</p>";
-		s += "<p>Wind gust: " + data.wind.gust + "</p>";
-		s += "<p>Wind deg: " + data.wind.deg + "</p>";
+		s += "<p>Humidity: " + data.main.humidity + "%</p>";
+		s += "<p>Pressure: " + data.main.pressure + "<abbr title='hectopascal'>hPa</abbr></p>";
+		s += "<p>Temp: " + Math.round(tempCel) + "&deg;C (" + tempMin + "&deg;C - " + tempMax + "&deg;C)</p>";
+		s += "<p>Cloud: " + data.wind.speed + "</p>";
+		s += "<p>" + data.weather[0]['description'] + "</p>";
+		s += "<p>Wind:</p>";
+		s += "<ul><li>Wind speed: " + data.wind.speed + "</li>";
+		s += "<li>Wind gust: " + data.wind.gust + "</li>";
+		s += "<li>Wind deg: " + data.wind.deg + "</li></ul>";
 		s += "<p><img title='" + data.weather.icon + "' src='http://openweathermap.org/img/w/" + data.weather[0]['icon'] + ".png' /></p>";
 		
-		s += "<p><a href='" + data.url + "' title='' target='_blank'>" + data.url + "</a></p>";
+		s += "<p>Last updated: " + data.date + "</p>";
+		s += "<p><a href='" + data.url + "' title='' target='_blank'>openweathermap.org</a></p>";
 		
 		$("#weatherReport").html(s);
 	});
 });
 
-$("#weatherPageXXX").live("pagebeforeshow", function() {
-	var page = $(this);
-	//var query = page.data("url").split("?")[1];
-	//var id = query.split("=")[1];
-	//console.log("Getting weather detail for "+id);
-	console.log("Getting weather detail");
-	$.mobile.showPageLoadingMsg();
-	$.get("http://api.openweathermap.org/data/2.1/weather/city/524901", function(res) {
-		alert("Data Loaded: " + res);
-		console.log("Inside...");
-		$.mobile.hidePageLoadingMsg();
-		//$("h1",page).text(res.name);
-		// /var s = res;
-		//var s = "<p>" + res.description + "</p>";
-			//s += "<p>Date: " + res.start + "<br/>";
-			//s += "<p>Venue: "+res.venue + "<br/>";
-			//s += "<p>GPS: "+res.gps + "<br/>";
-			//s += "<input type=hidden id=gps value=" + res.gps + ">";
- 			
- 			//if(res.image !== null) s += "<p class=\"image\"><img src='images/" + res.image + "'></p>";
-			
-			$("#weatherReport").html(res);
-			
-	},"json");
-});
+$("#weatherForecastPage").live("pagebeforeshow", function() {
 
-$("#sponsorsPage").live("pageinit", function() {
-	// console.log("Getting remote list");
-	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/sponsordata.php", {}, function(res) {
-	$.get("http://www.stylus.co.za/cts/sponsordata.php", {}, function(res) {
-		$.mobile.hidePageLoadingMsg();
+	var page = $(this);
+	var query = page.data("url").split("?")[1];
+	 
+	var weatherCityCode = '3369157'; // Cape Town
+	var appID = 'aa05fb30074ff517833db8ba123597bf';
+	var unit = 'metric';
+	var KELVIN = 273.15;
+	if(unit === 'metric') var KELVIN = 0;
+	    	
+	function getForecast(callback) {
+
+	    var openforecastURL = 'http://api.openweathermap.org/data/2.5/forecast?id=' + weatherCityCode + '&APPID=' + appID + '&units=' + unit;
+	    $.ajax({
+	        type: "GET",
+	        url: openforecastURL,
+	        dataType: "jsonp",
+			success: callback
+	    });
+	}
+
+	// get data:
+	getForecast(function (data) {
+	    console.log('forecast data received');
+
+		$("h1",page).text(data.city.name + ", " + data.city.country);
+		
 		var s = "";
-		if (res.length === 0) {
-			s+= "<li>Nothing for you</li>";
-		} else {
-			for(var i=0; i<res.length; i++) {
-				s+= "<li class=\"ui-button\">";
-				s+= "<a href='sponsor-detail.html?id=" + res[i].id + "'><img src='images/" + res[i].icon + "' class='ui-li-thumb'><p class=\"ui-li-aside ui-li-desc\"><strong>" + res[i].twitter + "</strong></p>";
-				s+= "<h3>" + res[i].name + "</h3>";
-				s+= "<p>" + res[i].description + "</p>";
-				s+= "</a>";
-				s+= "</li>";
-			}
-		}
-		$("#sponsorList").html(s);
-		$("#sponsorList").listview("refresh");
-	},"json");
- 
+		s += "<p>" + data.city.name + ", " + data.city.country + "</p>";
+		s += "<table data-role=\"table\" id=\"forecast-table\" class=\"ui-responsive table-stripe\" data-mode=\"columntoggle\">";
+		s += "<thead><th>dt</th><th>temp</th><th>humidity</th><th>clouds</th><th>wind</th></thead>";
+		s += "<tbody>";
+		$(jQuery.parseJSON(JSON.stringify(data.list))).each(function() {  
+			var dt = this.dt;
+			var dt_txt = this.dt_txt;
+			var temp = this.main.temp;
+			var tempMin = this.main.temp_min;
+			var tempMax = this.main.temp_max;
+			var humidity = this.main.humidity;
+			var cloud = this.weather.main;
+			var clouds = this.clouds.all;
+			var windSpeed = this.wind.speed;
+			var windDeg = this.wind.deg;
+			//var rain = this.rain.speed;
+			s += "<tr><td>" + dt_txt + " (" + dt + ")</td><td>" + temp + "&degC (" + tempMin + "&degC - " + tempMax + "&degC)</td><td>" + humidity + "%</td><td>" + cloud + " - " + clouds + "</td><td>" + windSpeed + " - " + windDeg + "</td></tr>";
+		});
+		s += "</tbody>";
+		s += "</table>";
+		$("#weatherForecast").html(s);
+		$("#forecast-table").refresh;
+	});
 });
 
 function createContact() {					
@@ -297,6 +329,65 @@ function onError(contactError) {
 	gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "Contacts", "Create", "Error: " +contactError.code, 1);
 };
 
+$("#sponsorsPage").live("pageinit", function() {
+	// console.log("Getting remote list");
+	$.mobile.showPageLoadingMsg();
+	//$.get("http://127.0.0.1/cts/sponsordata.php", {}, function(res) {
+	$.get("http://www.stylus.co.za/cts/sponsordata.php", {}, function(res) {
+		$.mobile.hidePageLoadingMsg();
+		var s = "";
+		if (res.length === 0) {
+			s+= "<li>Nothing for you</li>";
+		} else {
+			$(jQuery.parseJSON(JSON.stringify(res))).each(function() {  
+				var sponsorID = this.sponsorID;
+				var sponsorName = this.sponsorName;
+				var sponsorDescription = this.sponsorDescription;
+				var sponsorTel = this.sponsorTel;
+				var sponsorIcon = this.sponsorIcon;
+
+				s+= "<li class=\"ui-button\">";
+				s+= "<a href='sponsor-detail.html?id=" + sponsorID + "'><img src='images/" + sponsorIcon + "' class='ui-li-thumb'><p class=\"ui-li-aside ui-li-desc\"><strong>" + sponsorTel + "</strong></p>";
+				s+= "<h3>" + sponsorName + "</h3>";
+				if(sponsorDescription !== null) s+= "<p>" + sponsorDescription + "</p>";
+				s+= "</a>";
+				s+= "</li>";				
+			});			
+		}
+		$("#sponsorList").html(s);
+		$("#sponsorList").listview("refresh");
+	},"json");
+});
+
+$("#restaurantsPage").live("pageinit", function() {
+	// console.log("Getting remote list");
+	$.mobile.showPageLoadingMsg();
+	//$.get("http://127.0.0.1/cts/sponsordata.php", {type:"r"}, function(res) {
+	$.get("http://www.stylus.co.za/cts/sponsordata.php", {type:"r"}, function(res) {
+		$.mobile.hidePageLoadingMsg();
+		var s = "";
+		if (res.length === 0) {
+			s+= "<li>Nothing for you</li>";
+		} else {
+			$(jQuery.parseJSON(JSON.stringify(res))).each(function() {  
+				var sponsorID = this.sponsorID;
+				var sponsorName = this.sponsorName;
+				var sponsorDescription = this.sponsorDescription;
+				var sponsorTel = this.sponsorTel;
+				var sponsorIcon = this.sponsorIcon;
+
+				s+= "<li class=\"ui-button\">";
+				s+= "<a href='sponsor-detail.html?id=" + sponsorID + "'><img src='images/" + sponsorIcon + "' class='ui-li-thumb'><p class=\"ui-li-aside ui-li-desc\"><strong>" + sponsorTel + "</strong></p>";
+				s+= "<h3>" + sponsorName + "</h3>";
+				s+= "<p>" + sponsorDescription + "</p>";
+				s+= "</a>";
+				s+= "</li>";				
+			});			
+		}
+		$("#restaurantList").html(s);
+		$("#restaurantList").listview("refresh");
+	},"json");
+});
 
 $("#sponsorPage").live("pageshow", function() {
 	$("#btnCreateContact").off("click").on("click", createContact);
@@ -324,7 +415,7 @@ $("#sponsorPage").live("pagebeforeshow", function() {
 			//else s+= res.cost;			
  			//s+= "</p>";
  			
- 			if(res.image !== null) s += "<p class=\"image\"><img src='images/" + res.image + "'></p>";
+ 			if(res.image !== null) s += "<div id='logo_image'><img src='images/" + res.image + "'></div>";
 			
 			s += "<p><a id='btnCreateContact' data-role='button'>Create Contact</a></p>";
 			
@@ -375,7 +466,7 @@ $("#detailPage").live("pagebeforeshow", function() {
 var app = {
 	showAlert: function (message, title) {
 	    if (navigator.notification) {
-	        navigator.notification.alert(message + ' on Device', null, title, 'OK');
+			navigator.notification.alert(message + ' on Device', null, title, 'OK');
 	    } else {
 	        alert(title ? (title + ": " + message) : message);
 	    }
@@ -385,4 +476,4 @@ var app = {
         self.showAlert('App Initialized', 'Info');
     }	
 }
-app.initialize();
+//app.initialize();

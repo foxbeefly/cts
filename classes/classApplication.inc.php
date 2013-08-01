@@ -25,21 +25,31 @@ class Application extends DB_Class {
 					  `eventCost` int(11),
 					  `eventImage` text,
 					  PRIMARY KEY (`eventID`)
-					);";
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 		} elseif($table == $this->tableSponsors) {
 			$sql =	"CREATE TABLE IF NOT EXISTS `$this->tableSponsors` (
 					  `sponsorID` int(11) NOT NULL AUTO_INCREMENT,
 					  `sponsorName` varchar(200) NOT NULL,
-					  `sponsorDescription` text,
-					  `sponsorTel` text,
-					  `sponsorCell` text,
-					  `sponsorURL` text,
-					  `sponsorFacebook` text,
-					  `sponsorTwitter` text,
-					  `sponsorImage` text,
-					  `sponsorIcon` text,
+					  `sponsorDescription` text NULL,
+					  `sponsorTel` text NULL,
+					  `sponsorCell` text NULL,
+					  `sponsorURL` text NULL,
+					  `sponsorFacebook` text NULL,
+					  `sponsorTwitter` text NULL,
+					  `sponsorImage` text NULL,
+					  `sponsorIcon` text NULL,
+					  `sponsorType` text NULL,
 					  PRIMARY KEY (`sponsorID`)
-					);";			
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8;";			
+		} elseif($table == $this->tableResults) {
+			$sql =	"CREATE TABLE IF NOT EXISTS `$this->tableResults` (
+						`eventID` int(11) NOT NULL,
+						`resultPos` int(200) NOT NULL,
+						`resultRaceNo` int(200) DEFAULT NULL,
+						`resultRaceName` text,
+						`resultRaceCat` text,
+						`resultRaceTime` text NOT NULL
+						) ENGINE=InnoDB DEFAULT CHARSET=utf8;";								
 		} elseif($table == $this->tableLog) {
 			// ja ja
 		}			
@@ -378,6 +388,7 @@ class Application extends DB_Class {
 		{
 			if($this->createTable($table))
 			{
+				error_log("Table created: ".$table, 0);
 				return true;	
 			}
 		}

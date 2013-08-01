@@ -15,7 +15,11 @@
 	<!-- IE6-8 support of HTML5 elements --> <!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-
+	<style>
+		/*
+		 * THIS IS IN THE HEAD OF RESULTS.HTML
+		 */
+	</style>
 </head>
  
 <body>
@@ -23,11 +27,11 @@
 	<div data-role="header">
 		<a href="index.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Home</a>
 		<h1>Results</h1>
-		<a href="about-popup.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+		<a href="results-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
 	</div>
  
 	<div data-role="content">	
-		<ul data-role="listview" id="resultsList">
+		<ul data-role="listview" id="resultsList" data-filter="true" >
 			
 		</ul>
 		<div class="ui-grid-a ui-bar">

@@ -27,6 +27,7 @@ abstract class DB_Class {
 	// all the tables
 	public $tableEvents = 'ctsEvents';
 	public $tableSponsors = 'ctsSponsors';
+	public $tableResults = 'ctsResults';
 	public $tableLog = 'ctsLog';
 	
     function __construct()

@@ -1,17 +1,20 @@
 <?php
 require('config.php');
 
-$event = new Event();
+$data = new Event();
 
 	if(isset($_GET['id']) && $_GET['id'] > 0)
 	{
 		$getid = $_GET['id'];
-		$eventList = $event->listEvent($getid);
+		$dataList = $data->listEvent($getid);
 
+	} elseif(isset($_GET['rid']) && $_GET['rid'] > 0) {
+		$getid = $_GET['rid'];
+		$dataList = $data->listResults($getid);
 	} else {
-		$eventList = $event->getEvents();
+		$dataList = $data->getEvents();
 	}
 	
-$jlogList = json_encode($eventList);
-echo $jlogList;
+$jdataList = json_encode($dataList);
+echo $jdataList;
 ?>

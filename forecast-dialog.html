@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!-- http://www.raymondcamden.com/index.cfm/2012/5/5/Converting-a-dynamic-web-site-to-a-PhoneGap-application --> 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -18,20 +17,11 @@
 </head>
  
 <body>
-<div data-role="page" id="restaurantsPage">
+<div data-role="dialog" id="weatherForecastPop">
 	<div data-role="header">
-		<a href="index.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
-		<h1>Cape Town Surfski 2013</h1>
-		<a href="#" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
-	</div>
-	<div data-role="content">	
-		<ul data-role="listview"  id="restaurantList">
-			<!-- placeholder will be populated via Ajax -->
-		</ul>
-	</div>
-	<div data-role="footer">
-		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
-	</div>
+		<h1>About Weather</h1>
+	</div> 
+	<div data-role="content"><p>We are using the amazing weather API provided by <a href="openweathermap.org">openweathermap.org</a>.</p></div>
 </div>
 </body>
 </html>

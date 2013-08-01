@@ -1,15 +1,17 @@
 <?php
 class Sponsor extends Application
 {
-	function getSponsors()
+	function getSponsors($sponsorType = 'e')
 	{
 		$listArray = array();
 		// check for the table first, creating it if it does not...
 		$this->checkTableExists($this->tableSponsors);
-		if($data = $this->fetch("SELECT * FROM `$this->tableSponsors`;"))
+		if($data = $this->fetch("SELECT * FROM `$this->tableSponsors` WHERE `sponsorType` = '".$sponsorType."';"))
 		{
 			foreach($data as $row)
 			{
+				array_push($listArray, $row);
+				/*
 				$c = $row['sponsorID']-1;
 				$listArray[$c]['id'] = $row['sponsorID'];
 				$listArray[$c]['name'] = $row['sponsorName'];
@@ -20,6 +22,7 @@ class Sponsor extends Application
 				$listArray[$c]['url'] = $row['sponsorURL'];
 				$listArray[$c]['image'] = $row['sponsorImage'];
 				$listArray[$c]['icon'] = $row['sponsorIcon'];
+				 */
 			}
 		}
 		return $listArray;

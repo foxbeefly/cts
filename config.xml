@@ -3,7 +3,7 @@
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "co.za.stylus.cts"
         versionCode = "1"
-        version     = "0.0.4">
+        version     = "0.0.5">
  
 	<name>Cape Town Surfski 2013</name>
  
@@ -23,6 +23,19 @@
 	<feature name="http://api.phonegap.com/1.0/network"/>
 	<feature name="http://api.phonegap.com/1.0/notification"/>
 	
-	<gap:splash src="images/splash.png" />
+	<gap:splash src="splash/splash-480x320.png"   gap:platform="ios" width="320"  height="480"  /><!-- Regular iPhone4 -->
+	<gap:splash src="splash/splash-640x960.png"   gap:platform="ios" width="640"  height="960"  /><!-- Retina iPhone4 -->
+	<gap:splash src="splash/splash-640x1136.png"  gap:platform="ios" width="640"  height="1136" /><!-- iPhone5 -->
+	<gap:splash src="splash/splash-768x1004.png"  gap:platform="ios" width="768"  height="1004" /><!-- iPad Portrait -->
+	<gap:splash src="splash/splash-1024x748.png"  gap:platform="ios" width="1024" height="748"  /><!-- iPad Landscape -->
+
+	<!-- Retina iPads: Requires PhoneGap 2.5.0 or higher -->
+	<gap:splash src="splash/splash-1536x2008.png" gap:platform="ios" width="1536" height="2008" /><!-- Portrait -->
+	<gap:splash src="splash/splash-2048x1496.png" gap:platform="ios" width="2048" height="1496" /><!-- Landscape -->
+
+	<gap:splash src="splash/splash-320x426.png" gap:platform="android" gap:density="ldpi"  width="320" height="426" />
+	<gap:splash src="splash/splash-320x470.png" gap:platform="android" gap:density="mdpi"  width="320" height="470" />
+	<gap:splash src="splash/splash-480x640.png" gap:platform="android" gap:density="hdpi"  width="480" height="640" />
+	<gap:splash src="splash/splash-720x960.png" gap:platform="android" gap:density="xhdpi" width="720" height="960" />
  
 </widget>

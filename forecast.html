@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!-- http://www.raymondcamden.com/index.cfm/2012/5/5/Converting-a-dynamic-web-site-to-a-PhoneGap-application --> 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -15,19 +14,37 @@
 	<!-- IE6-8 support of HTML5 elements --> <!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<style>
+		.table-stripe thead th {
+  			border-bottom: 1px solid rgba(0, 0, 0, .1);
+		}
+		.table-stripe tbody th,
+		.table-stripe tbody td {
+			border-bottom: 1px solid rgba(0, 0, 0, .05);
+		}
+		/* Add alternating row stripes */
+		.table-stripe tbody tr:nth-child(odd) td,
+		.table-stripe tbody tr:nth-child(odd) th {
+			background-color: rgba(0,0,0,0.04);
+		}
+		/* Add stroke to the header and last item */
+		.table-stripe thead th,
+		.table-stripe tbody tr:last-child {
+			border-bottom: 1px solid rgba(0, 0, 0, .1);
+		}		
+	</style>
 </head>
  
 <body>
-<div data-role="page" id="restaurantsPage">
+<div data-role="page" id="weatherForecastPage">
 	<div data-role="header">
-		<a href="index.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<a href="weather.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
 		<h1>Cape Town Surfski 2013</h1>
-		<a href="#" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+		<a href="forecast-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
 	</div>
-	<div data-role="content">	
-		<ul data-role="listview"  id="restaurantList">
-			<!-- placeholder will be populated via Ajax -->
-		</ul>
+	<div data-role="content" id="weatherForecast">
+		<p>Weather forecast:</p>
+		<div id="weatherForecast"></div>
 	</div>
 	<div data-role="footer">
 		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
