@@ -14,7 +14,6 @@
 	<author href="http://www.stylus.co.za" email="david@stylus.co.za">
 		David Fox      
 	</author>
-
 	<plugin name="Notification" value="org.apache.cordova.Notification"/>
 	
 	<gap:splash src="splash/splash-480x320.png"   gap:platform="ios" width="320"  height="480"  /><!-- Regular iPhone4 -->
