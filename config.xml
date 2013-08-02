@@ -16,6 +16,8 @@
 	</author>
 	<plugin name="Notification" value="org.apache.cordova.Notification"/>
 	
+	<icon src="icon.png" />
+
 	<gap:splash src="splash/splash-480x320.png"   gap:platform="ios" width="320"  height="480"  /><!-- Regular iPhone4 -->
 	<gap:splash src="splash/splash-640x960.png"   gap:platform="ios" width="640"  height="960"  /><!-- Retina iPhone4 -->
 	<gap:splash src="splash/splash-640x1136.png"  gap:platform="ios" width="640"  height="1136" /><!-- iPhone5 -->
