@@ -23,3 +23,6 @@ v0.0.5
 - implemented a heap of Weather code from the openweathermap.org API
 - added / fixed / improved and tested table create code
 - added filter to listview on Results page
+
+v0.1.0
+- started refactor to single-page template

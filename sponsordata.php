@@ -8,10 +8,15 @@ $sponsor = new Sponsor();
 		$getid = $_GET['id'];
 		$sponsorList = $sponsor->listSponsor($getid);
 
-	} elseif(isset($_GET['type']) && $_GET['type'] === 'r') 	{
-		$getType = $_GET['type'];
-		$sponsorList = $sponsor->getSponsors($getType);
-
+	} elseif (isset($_GET['type'])) {
+ 		if($_GET['type'] === 'r')
+ 		{
+			$getType = $_GET['type'];
+			$sponsorList = $sponsor->getSponsors($getType);
+		} elseif ($_GET['type'] === 'a') {
+			$getType = $_GET['type'];
+			$sponsorList = $sponsor->getSponsors($getType);
+		}		
 	} else {
 		$sponsorList = $sponsor->getSponsors();
 	}

@@ -32,30 +32,111 @@
 	</div>
 	<div data-role="navbar">
 		<ul>
-			<li><a href="calendar.html" class="ui-btn-active ui-state-persist">Calendar</a></li>
-			<li><a href="results.html">Results</a></li>
-			<li><a href="restaurants.html">Restaurants</a></li>
-			<!-- <li><a href="accommodation.html">Accommodation</a></li> -->
-			<li><a href="sponsors.html">Sponsors</a></li>
+			<li><a href="#calendarPage" class="ui-btn-active ui-state-persist">Calendar</a></li>
+			<li><a href="#resultsPage">Results</a></li>
+			<li><a href="#restaurantsPage">Restaurants</a></li>
+			<li><a href="#accommodationsPage">Accommodation</a></li>
+			<li><a href="#sponsorsPage">Sponsors</a></li>
 			<li><a href="weather.html">Weather</a></li>
 			<li><a href="map.html">Map</a></li>
 		</ul>
 	</div><!-- /navbar --> 
 	<div data-role="content">	
-
-
 		<div class="ui-grid-a">
 			<div class="ui-block-a" style="text-align: center;"><img src="images/cape-town-surfski-logo.jpg" /></div>
 			<div class="ui-block-b" style="text-align: center;"><img src="images/cape-town-downwind-series-logo.jpg" /></div>
 			<div class="ui-block-c" style="text-align: center;"><img src="images/fenn-surfskis-logo.jpg" /></div>
 			<div class="ui-block-d" style="text-align: center;"><img src="images/sea-dog-logo.jpg" /></div>
 		</div>
-	
+		<div class="ui-grid-a ui-bar">
+			<div class="ui-block-a" style="text-align: center;"></div>
+			<div class="ui-block-b" style="text-align: center;"><p><a href="http://www.stylus.co.za" target="_blank"><img src="images/sicon_mini.gif" /></a></p></div>
+		</div><!-- /grid-b -->
+	</div>
+	<div data-role="footer">
+		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
+	</div>
+</div>
+<div data-role="page" id="calendarPage">
+	<div data-role="header">
+		<a href="#indexPage" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Home</a>
+		<h1>Action Line-up</h1>
+		<a href="calendar-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+	</div>
+ 
+	<div data-role="content">	
+		<ul data-role="listview" id="eventList">
+		</ul>
 		<div class="ui-grid-a ui-bar">
 			<div class="ui-block-a" style="text-align: center;"><a href="http://www.cape-hike.co.za" target="_blank"><img src="images/cape-hike-icon.png" /></a></div>
 			<div class="ui-block-b" style="text-align: center;"><a href="http://www.stylus.co.za" target="_blank"><img src="images/sicon_mini.gif" /></a></div>
 		</div><!-- /grid-b -->
-		
+	
+	</div>
+	<div data-role="footer">
+		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
+	</div>
+</div>
+<div data-role="page" id="resultsPage">
+	<div data-role="header">
+		<a href="#indexPage" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Home</a>
+		<h1>Results</h1>
+		<a href="results-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+	</div>
+ 
+	<div data-role="content">	
+		<ul data-role="listview" id="resultsList" data-filter="true" >
+			
+		</ul>
+		<div class="ui-grid-a ui-bar">
+			<div class="ui-block-a" style="text-align: center;"></div>
+			<div class="ui-block-b" style="text-align: center;"><p><a href="http://www.stylus.co.za" target="_blank"><img src="images/sicon_mini.gif" /></a></p></div>
+		</div><!-- /grid-b -->
+	
+	</div>
+	<div data-role="footer">
+		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
+	</div>
+</div>
+<div data-role="page" id="sponsorsPage">
+	<div data-role="header">
+		<a href="#indexPage" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<h1>Cape Town Surfski 2013</h1>
+		<a href="sponsors-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+	</div>
+	<div data-role="content">	
+		<ul data-role="listview"  id="sponsorList">
+			<!-- placeholder will be populated via Ajax -->
+		</ul>
+	</div>
+	<div data-role="footer">
+		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
+	</div>
+</div>
+<div data-role="page" id="restaurantsPage">
+	<div data-role="header">
+		<a href="index.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<h1>Cape Town Surfski 2013</h1>
+		<a href="#" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+	</div>
+	<div data-role="content">	
+		<ul data-role="listview"  id="restaurantList">
+			<!-- placeholder will be populated via Ajax -->
+		</ul>
+	</div>
+	<div data-role="footer">
+		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
+	</div>
+</div>
+<div data-role="page" id="accommodationsPage">
+	<div data-role="header">
+		<a href="index.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<h1>Cape Town Surfski 2013</h1>
+		<a href="about-popup.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+	</div>
+	<div data-role="content">	
+		<ul data-role="listview"  id="accommodationList">
+		</ul>
 	</div>
 	<div data-role="footer">
 		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>

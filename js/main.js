@@ -349,7 +349,7 @@ $("#sponsorsPage").live("pageinit", function() {
 				s+= "<li class=\"ui-button\">";
 				s+= "<a href='sponsor-detail.html?id=" + sponsorID + "'><img src='images/" + sponsorIcon + "' class='ui-li-thumb'><p class=\"ui-li-aside ui-li-desc\"><strong>" + sponsorTel + "</strong></p>";
 				s+= "<h3>" + sponsorName + "</h3>";
-				if(sponsorDescription !== null) s+= "<p>" + sponsorDescription + "</p>";
+				s+= "<p>" + sponsorDescription + "</p>";
 				s+= "</a>";
 				s+= "</li>";				
 			});			
@@ -389,6 +389,36 @@ $("#restaurantsPage").live("pageinit", function() {
 	},"json");
 });
 
+$("#accommodationsPage").live("pageinit", function() {
+	// console.log("Getting remote list");
+	$.mobile.showPageLoadingMsg();
+	//$.get("http://127.0.0.1/cts/sponsordata.php", {type:"a"}, function(res) {
+	$.get("http://www.stylus.co.za/cts/sponsordata.php", {type:"r"}, function(res) {
+		$.mobile.hidePageLoadingMsg();
+		var s = "";
+		if (res.length === 0) {
+			s+= "<li>Nothing for you</li>";
+		} else {
+			$(jQuery.parseJSON(JSON.stringify(res))).each(function() {  
+				var sponsorID = this.sponsorID;
+				var sponsorName = this.sponsorName;
+				var sponsorDescription = this.sponsorDescription;
+				var sponsorTel = this.sponsorTel;
+				var sponsorIcon = this.sponsorIcon;
+
+				s+= "<li class=\"ui-button\">";
+				s+= "<a href='sponsor-detail.html?id=" + sponsorID + "'><img src='images/" + sponsorIcon + "' class='ui-li-thumb'><p class=\"ui-li-aside ui-li-desc\"><strong>" + sponsorTel + "</strong></p>";
+				s+= "<h3>" + sponsorName + "</h3>";
+				s+= "<p>" + sponsorDescription + "</p>";
+				s+= "</a>";
+				s+= "</li>";				
+			});			
+		}
+		$("#accommodationList").html(s);
+		$("#accommodationList").listview("refresh");
+	},"json");
+});
+
 $("#sponsorPage").live("pageshow", function() {
 	$("#btnCreateContact").off("click").on("click", createContact);
 	//$("#btnCreateContact").on("click", function() {	});
@@ -398,7 +428,7 @@ $("#sponsorPage").live("pagebeforeshow", function() {
 	var page = $(this);
 	var query = page.data("url").split("?")[1];
 	var id = query.split("=")[1];
-	console.log("Getting remote detail for "+id);
+	console.log("Getting sponsor detail for "+id);
 	$.mobile.showPageLoadingMsg();
 	//$.get("http://127.0.0.1/cts/sponsordata.php", {id:id}, function(res) {
 	$.get("http://www.stylus.co.za/cts/sponsordata.php", {id:id}, function(res) {
