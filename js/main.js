@@ -104,8 +104,8 @@ $("#mapPage").live("pageinit", function() {
 $("#calendarPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/eventdata.php", {}, function(res) {
-	$.get("http://www.stylus.co.za/cts/eventdata.php", {}, function(res) {	
+	$.get("http://127.0.0.1/cts/eventdata.php", {}, function(res) {
+	//$.get("http://www.stylus.co.za/cts/eventdata.php", {}, function(res) {	
 		$.mobile.hidePageLoadingMsg();
 		var s = "";
 		
@@ -126,8 +126,8 @@ $("#calendarPage").live("pageinit", function() {
 $("#resultsPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/eventdata.php", {}, function(res) {
-	$.get("http://www.stylus.co.za/cts/eventdata.php", {}, function(res) {	
+	$.get("http://127.0.0.1/cts/eventdata.php", {}, function(res) {
+	//$.get("http://www.stylus.co.za/cts/eventdata.php", {}, function(res) {	
 		$.mobile.hidePageLoadingMsg();
 		var s = "";
 		
@@ -150,8 +150,8 @@ $("#resultPage").live("pagebeforeshow", function() {
 	var id = query.split("=")[1];
 	console.log("Getting remote detail for "+id);
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/eventdata.php", {rid:id}, function(res) {
-	$.get("http://www.stylus.co.za/cts/eventdata.php", {rid:id}, function(res) {
+	$.get("http://127.0.0.1/cts/eventdata.php", {rid:id}, function(res) {
+	//$.get("http://www.stylus.co.za/cts/eventdata.php", {rid:id}, function(res) {
 		$.mobile.hidePageLoadingMsg();
 		$("h1",page).text(res[0].eventName);
 		var s = "<p>" + res[0].eventDescription + "</p>";
@@ -332,8 +332,8 @@ function onError(contactError) {
 $("#sponsorsPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/sponsordata.php", {}, function(res) {
-	$.get("http://www.stylus.co.za/cts/sponsordata.php", {}, function(res) {
+	$.get("http://127.0.0.1/cts/sponsordata.php", {}, function(res) {
+	//$.get("http://www.stylus.co.za/cts/sponsordata.php", {}, function(res) {
 		$.mobile.hidePageLoadingMsg();
 		var s = "";
 		if (res.length === 0) {
@@ -362,8 +362,8 @@ $("#sponsorsPage").live("pageinit", function() {
 $("#restaurantsPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/sponsordata.php", {type:"r"}, function(res) {
-	$.get("http://www.stylus.co.za/cts/sponsordata.php", {type:"r"}, function(res) {
+	$.get("http://127.0.0.1/cts/sponsordata.php", {type:"r"}, function(res) {
+	//$.get("http://www.stylus.co.za/cts/sponsordata.php", {type:"r"}, function(res) {
 		$.mobile.hidePageLoadingMsg();
 		var s = "";
 		if (res.length === 0) {
@@ -392,8 +392,8 @@ $("#restaurantsPage").live("pageinit", function() {
 $("#accommodationsPage").live("pageinit", function() {
 	// console.log("Getting remote list");
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/sponsordata.php", {type:"a"}, function(res) {
-	$.get("http://www.stylus.co.za/cts/sponsordata.php", {type:"r"}, function(res) {
+	$.get("http://127.0.0.1/cts/sponsordata.php", {type:"a"}, function(res) {
+	//$.get("http://www.stylus.co.za/cts/sponsordata.php", {type:"r"}, function(res) {
 		$.mobile.hidePageLoadingMsg();
 		var s = "";
 		if (res.length === 0) {
@@ -430,8 +430,8 @@ $("#sponsorPage").live("pagebeforeshow", function() {
 	var id = query.split("=")[1];
 	console.log("Getting sponsor detail for "+id);
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/sponsordata.php", {id:id}, function(res) {
-	$.get("http://www.stylus.co.za/cts/sponsordata.php", {id:id}, function(res) {
+	$.get("http://127.0.0.1/cts/sponsordata.php", {id:id}, function(res) {
+	//$.get("http://www.stylus.co.za/cts/sponsordata.php", {id:id}, function(res) {
 		$.mobile.hidePageLoadingMsg();
 		$("h1",page).text(res.name);
 		var s = "<p>" + res.description + "</p>";
@@ -459,8 +459,8 @@ $("#detailPage").live("pagebeforeshow", function() {
 	var id = query.split("=")[1];
 	console.log("Getting remote detail for "+id);
 	$.mobile.showPageLoadingMsg();
-	//$.get("http://127.0.0.1/cts/eventdata.php", {id:id}, function(res) {
-	$.get("http://www.stylus.co.za/cts/eventdata.php", {id:id}, function(res) {
+	$.get("http://127.0.0.1/cts/eventdata.php", {id:id}, function(res) {
+	//$.get("http://www.stylus.co.za/cts/eventdata.php", {id:id}, function(res) {
 		$.mobile.hidePageLoadingMsg();
 		$("h1",page).text(res.name);
 		var s = "<p>" + res.description + "</p>";

@@ -5,9 +5,15 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>Cape Town Surfski 2013</title>
+	
+	<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.min.js"></script>	 -->
+	
 	<link rel="stylesheet" href="css/jquery.mobile-1.3.0-rc.1.min.css" />
 	<script src="js/jquery-1.8.3.js"></script>
 	<script src="js/jquery.mobile-1.3.0-rc.1.js"></script>
+	
 	<script src="js/phonegap.js"></script>
 	<script src="js/main.js"></script>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -17,11 +23,6 @@
 	<!-- IE6-8 support of HTML5 elements --> <!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<style>
-		/*
-		 * THIS IS IN THE HEAD OF INDEX.HTML
-		 */
-	</style>
 </head>
  
 <body>
@@ -37,11 +38,13 @@
 			<li><a href="#restaurantsPage">Restaurants</a></li>
 			<li><a href="#accommodationsPage">Accommodation</a></li>
 			<li><a href="#sponsorsPage">Sponsors</a></li>
-			<li><a href="weather.html">Weather</a></li>
-			<li><a href="map.html">Map</a></li>
+			<li><a href="#weatherPage">Weather</a></li>
+			<li><a href="#mapPage">Map</a></li>
 		</ul>
 	</div><!-- /navbar --> 
 	<div data-role="content">	
+		<div id="msgContainer">&nbsp;</div>
+		
 		<div class="ui-grid-a">
 			<div class="ui-block-a" style="text-align: center;"><img src="images/cape-town-surfski-logo.jpg" /></div>
 			<div class="ui-block-b" style="text-align: center;"><img src="images/cape-town-downwind-series-logo.jpg" /></div>
@@ -49,8 +52,8 @@
 			<div class="ui-block-d" style="text-align: center;"><img src="images/sea-dog-logo.jpg" /></div>
 		</div>
 		<div class="ui-grid-a ui-bar">
-			<div class="ui-block-a" style="text-align: center;"></div>
-			<div class="ui-block-b" style="text-align: center;"><p><a href="http://www.stylus.co.za" target="_blank"><img src="images/sicon_mini.gif" /></a></p></div>
+			<div class="ui-block-a" style="text-align: center;">&nbsp;</div>
+			<div class="ui-block-b" style="text-align: center;"><div><a href="http://www.stylus.co.za" target="_blank"><img src="images/sicon_mini.gif" /></a></div></div>
 		</div><!-- /grid-b -->
 	</div>
 	<div data-role="footer">
@@ -59,13 +62,14 @@
 </div>
 <div data-role="page" id="calendarPage">
 	<div data-role="header">
-		<a href="#indexPage" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Home</a>
+		<a href="#indexPage" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Home</a>
 		<h1>Action Line-up</h1>
 		<a href="calendar-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
 	</div>
  
 	<div data-role="content">	
 		<ul data-role="listview" id="eventList">
+			<!-- placeholder will be populated via Ajax -->
 		</ul>
 		<div class="ui-grid-a ui-bar">
 			<div class="ui-block-a" style="text-align: center;"><a href="http://www.cape-hike.co.za" target="_blank"><img src="images/cape-hike-icon.png" /></a></div>
@@ -79,14 +83,14 @@
 </div>
 <div data-role="page" id="resultsPage">
 	<div data-role="header">
-		<a href="#indexPage" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Home</a>
+		<a href="#indexPage" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Home</a>
 		<h1>Results</h1>
 		<a href="results-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
 	</div>
  
 	<div data-role="content">	
-		<ul data-role="listview" id="resultsList" data-filter="true" >
-			
+		<ul data-role="listview" id="resultsList" data-filter="true">
+			<!-- placeholder will be populated via Ajax -->
 		</ul>
 		<div class="ui-grid-a ui-bar">
 			<div class="ui-block-a" style="text-align: center;"></div>
@@ -100,7 +104,7 @@
 </div>
 <div data-role="page" id="sponsorsPage">
 	<div data-role="header">
-		<a href="#indexPage" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<a href="#indexPage" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
 		<h1>Cape Town Surfski 2013</h1>
 		<a href="sponsors-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
 	</div>
@@ -115,7 +119,7 @@
 </div>
 <div data-role="page" id="restaurantsPage">
 	<div data-role="header">
-		<a href="index.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<a href="#indexPage" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
 		<h1>Cape Town Surfski 2013</h1>
 		<a href="#" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
 	</div>
@@ -130,13 +134,62 @@
 </div>
 <div data-role="page" id="accommodationsPage">
 	<div data-role="header">
-		<a href="index.html" rel="external" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<a href="#indexPage" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
 		<h1>Cape Town Surfski 2013</h1>
 		<a href="about-popup.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
 	</div>
 	<div data-role="content">	
 		<ul data-role="listview"  id="accommodationList">
+			<!-- placeholder will be populated via Ajax -->
 		</ul>
+	</div>
+	<div data-role="footer">
+		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
+	</div>
+</div>
+<div data-role="page" id="mapPage">
+ 	<div data-role="header">
+		<a href="#indexPage" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<h1>Map sample</h1>
+		<a href="map-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+	</div>
+	<div data-role="content">
+		<div id="demoHolder"></div>
+		<div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+			<div id="mapHolder"><!-- placeholder will be populated via Ajax --></div>
+		</div>		
+		
+		<div id="mapHolder"></div>
+	</div>
+	<div data-role="footer">
+		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
+	</div>	
+</div>
+<div data-role="page" id="weatherPage">
+	<div data-role="header">
+		<a href="#indexPage" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<h1>Cape Town Surfski 2013</h1>
+		<a href="weather-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+	</div>
+	<div data-role="content">
+		<p>The weather forecast for today:</p>
+		<!-- http://api.openweathermap.org/data/2.1/weather/city/524901?type=html</p> -->
+		<div id="weatherReport"></div>
+		<p><a id='btnForecast' data-role='button' href="#weatherForecastPage">Forecast</a></p>
+	</div>
+	<div data-role="footer">
+		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
+	</div>
+</div>
+<div data-role="page" id="weatherForecastPage">
+	<div data-role="header">
+		<a href="#weatherPage" data-icon="arrow-l" data-iconpos="notext" data-theme="a">Back</a>
+		<h1>Cape Town Surfski 2013</h1>
+		<a href="forecast-dialog.html" data-rel="dialog" data-icon="info" data-iconpos="notext" class="ui-btn-right" data-transition="flip">About</a>
+	</div>
+	<div data-role="content" id="weatherForecast">
+		<p>Weather forecast:</p>
+		<div id="weatherForecast"></div>
 	</div>
 	<div data-role="footer">
 		<h4><a href="http://www.capetownsurfski.com/">www.capetownsurfski.com</a></h4>
